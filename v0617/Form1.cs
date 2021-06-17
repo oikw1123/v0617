@@ -14,6 +14,7 @@ namespace v0617
     {
         int vx = -10;
         int vy = -10;
+        int score = 100;
         public Form1()
         {
             InitializeComponent();
@@ -21,20 +22,31 @@ namespace v0617
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int.Parse(label1.Text);
-            int.Parse(label1.Text);
+            label1.Left += vx;
+            label1.Top += vy;
             
-            label1.Left = vx;
-            label1.Top = vy;
-            if (vx <= -1)
+            
+            if (label1.Left<0)
             {
-                vx = -10;
+                vx = Math.Abs(vx);
             }
-            if (vy <= -1)
+            if (label1.Top <0)
             {
-                vy = -10;
+               vy= Math.Abs(vy);
+            }
+            if (label1.Right > ClientSize.Width) 
+            {
+                vx = -Math.Abs(vx);
+            }
+            if (label1.Bottom > ClientSize.Height) 
+            {
+                vy = -Math.Abs(vy);
             }
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+        }
     }
 }
